@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ms" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cookie Club | Handcrafted Gourmet Soft Cookies</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Plus Jakarta Sans & Playfair Display for aesthetic bakery vibe) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cookie: {
+                            50: '#FAF6F0',
+                            100: '#F5EBE1',
+                            200: '#E4D1C1',
+                            300: '#D4B89B',
+                            500: '#A8763E',
+                            600: '#8C5A2B',
+                            800: '#4A2B11',
+                            900: '#2C1708',
+                        },
+                        caramel: '#D97706',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAF6F0;
+            color: #2C1708;
+        }
+        .hero-bg {
+            background-image: linear-gradient(to right, rgba(44, 23, 8, 0.85), rgba(74, 43, 17, 0.65)), url('https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-cookie-300 selection:text-cookie-900">
+
+    <!-- Config Banner / Tip for Student User -->
+    <div id="quick-config-banner" class="bg-cookie-800 text-cookie-100 text-xs py-2 px-4 text-center flex justify-between items-center border-b border-cookie-600">
+        <div class="flex-1">
+            <span>💡 <strong>Tip Assignment:</strong> Jangan lupa tukar URL <code>GOOGLE_FORM_URL</code> & <code>WHATSAPP_NUMBER</code> dalam modal settings atau terus ganti link kat butang!</span>
+        </div>
+        <button onclick="openConfigModal()" class="bg-cookie-500 hover:bg-caramel text-white text-xs px-3 py-1 rounded-full font-semibold transition ml-2 flex items-center gap-1">
+            <i class="fa-solid fa-gear"></i> Set Link Kau
+        </button>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-40 bg-cookie-50/90 backdrop-blur-md border-b border-cookie-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-2 group">
+                    <span class="text-3xl">🍪</span>
+                    <div>
+                        <span class="font-serif font-bold text-2xl text-cookie-900 tracking-tight block leading-none">The Cookie Club</span>
+                        <span class="text-[10px] text-cookie-600 font-semibold uppercase tracking-widest block">Homemade Soft Cookies</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-cookie-800">
+                    <a href="#menu" class="hover:text-cookie-500 transition-colors">Menu Cookies</a>
+                    <a href="#about" class="hover:text-cookie-500 transition-colors">Kenapa Kami?</a>
+                    <a href="#how-to-order" class="hover:text-cookie-500 transition-colors">Cara Order</a>
+                    <a href="#contact" class="hover:text-cookie-500 transition-colors">Hubungi Kami</a>
+                </div>
+
+                <!-- Action Button -->
+                <div class="hidden sm:flex items-center space-x-4">
+                    <button onclick="redirectToOrder()" class="bg-cookie-800 hover:bg-cookie-900 text-cookie-100 px-5 py-2.5 rounded-full text-sm font-semibold shadow-md hover:shadow-lg transition transform active:scale-95 flex items-center gap-2">
+                        <span>Order Sekarang</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-cookie-800 p-2 rounded-lg hover:bg-cookie-100 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cookie-100 border-b border-cookie-200 px-4 pt-2 pb-4 space-y-2">
+            <a href="#menu" class="block px-3 py-2 rounded-md text-base font-medium text-cookie-800 hover:bg-cookie-200">Menu Cookies</a>
+            <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-cookie-800 hover:bg-cookie-200">Kenapa Kami?</a>
+            <a href="#how-to-order" class="block px-3 py-2 rounded-md text-base font-medium text-cookie-800 hover:bg-cookie-200">Cara Order</a>
+            <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-cookie-800 hover:bg-cookie-200">Hubungi Kami</a>
+            <button onclick="redirectToOrder()" class="w-full mt-2 bg-cookie-800 text-cookie-100 py-3 rounded-xl font-semibold text-center flex items-center justify-center gap-2">
+                <i class="fa-solid fa-paper-plane"></i> Order Borang Google Form
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative hero-bg py-24 lg:py-36 text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-2xl">
+                <span class="inline-flex items-center gap-2 bg-caramel/30 border border-caramel/50 backdrop-blur-md text-caramel-200 text-xs px-4 py-1.5 rounded-full font-semibold mb-6 tracking-wide uppercase">
+                    ✨ Freshly Baked Everyday • Student Price ✨
+                </span>
+                <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                    Soft, Gooey & Absolutely Irresistible.
+                </h1>
+                <p class="text-cookie-100 text-base sm:text-lg mb-8 leading-relaxed">
+                    Nikmati kelazatan soft cookies homemade yang dibakar segar setiap hari! Rangup di luar, melt-in-your-mouth kat dalam dengan limpahan coklat premium.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button onclick="redirectToOrder()" class="bg-caramel hover:bg-amber-600 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition transform active:scale-95 flex items-center justify-center gap-3 text-base">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span>Order Via Google Form</span>
+                    </button>
+                    <a href="#menu" class="bg-cookie-100/20 hover:bg-cookie-100/30 text-white border border-white/30 backdrop-blur-md font-semibold px-8 py-4 rounded-full shadow transition flex items-center justify-center gap-2 text-base">
+                        <span>Tengok Menu</span>
+                        <i class="fa-solid fa-chevron-down text-sm"></i>
+                    </a>
+                </div>
+                
+                <!-- Trust Badge -->
+                <div class="mt-12 flex items-center gap-6 text-sm text-cookie-200 border-t border-white/15 pt-6">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-star text-amber-400"></i>
+                        <span>100% Butter Premium</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-heart text-red-400"></i>
+                        <span>Homemade Love</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features / Highlights Section -->
+    <section id="about" class="py-16 bg-cookie-100 border-b border-cookie-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-cookie-50 p-6 rounded-2xl border border-cookie-200/80 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-cookie-200/60 rounded-xl flex items-center justify-center text-cookie-800 text-xl mb-4">
+                        <i class="fa-solid fa-cookie-bite"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-cookie-900 mb-2">Gooey Center</h3>
+                    <p class="text-cookie-800 text-sm leading-relaxed">Tekstur lembut dekat tengah yang melt sebaik sahaja kau gigit. Memang puas hati!</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="bg-cookie-50 p-6 rounded-2xl border border-cookie-200/80 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-cookie-200/60 rounded-xl flex items-center justify-center text-cookie-800 text-xl mb-4">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-cookie-900 mb-2">Bahan Premium</h3>
+                    <p class="text-cookie-800 text-sm leading-relaxed">Menggunakan mentega tulen & coklat berkualiti tinggi tanpa pengawet tambahan.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-cookie-50 p-6 rounded-2xl border border-cookie-200/80 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-cookie-200/60 rounded-xl flex items-center justify-center text-cookie-800 text-xl mb-4">
+                        <i class="fa-solid fa-fire"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-cookie-900 mb-2">Freshly Baked</h3>
+                    <p class="text-cookie-800 text-sm leading-relaxed">Dibakar fresh setiap hari mengikut pesanan korang. Sentiasa panas & wangi!</p>
+                </div>
+                <!-- Feature 4 -->
+                <div class="bg-cookie-50 p-6 rounded-2xl border border-cookie-200/80 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 bg-cookie-200/60 rounded-xl flex items-center justify-center text-cookie-800 text-xl mb-4">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-cookie-900 mb-2">Harga Student</h3>
+                    <p class="text-cookie-800 text-sm leading-relaxed">Harga mampu milik khas untuk kawan-kawan campus & semua pencinta manis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 bg-cookie-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-cookie-500 font-semibold text-sm uppercase tracking-widest block mb-2">Signature Flavours</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-cookie-900 mb-4">Pilihan Menu Bestseller 🍪</h2>
+                <p class="text-cookie-800">Pilih perasa kegemaran kau dan buat tempahan terus melalui borang Google Form kami!</p>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Card 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-cookie-200 shadow-md hover:shadow-xl transition duration-300 flex flex-col group">
+                    <div class="relative overflow-hidden h-52">
+                        <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=800&auto=format&fit=crop" alt="Classic Choc Chip" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 right-3 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow">Best Seller</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-xl text-cookie-900 mb-2">Classic Choc Chip</h3>
+                            <p class="text-cookie-800 text-xs mb-4 leading-relaxed">Cookies klasik beraroma butter dengan limpahan Milk Choc Chips yang melted!</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-4 pt-3 border-t border-cookie-100">
+                                <span class="text-xs text-cookie-600 font-medium">1 Set (3 Pcs)</span>
+                                <span class="font-serif font-bold text-xl text-cookie-900">RM 12.00</span>
+                            </div>
+                            <button onclick="redirectToOrder('Classic Choc Chip')" class="w-full bg-cookie-800 hover:bg-cookie-900 text-white py-2.5 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Order Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-cookie-200 shadow-md hover:shadow-xl transition duration-300 flex flex-col group">
+                    <div class="relative overflow-hidden h-52">
+                        <img src="https://images.unsplash.com/photo-1607920592519-bab4d7db727d?q=80&w=800&auto=format&fit=crop" alt="Double Chocolate Fudge" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 right-3 bg-cookie-800 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow">Choc Lover</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-xl text-cookie-900 mb-2">Double Choc Fudge</h3>
+                            <p class="text-cookie-800 text-xs mb-4 leading-relaxed">Dough coklat gelap premium bertambah padu dengan gelapan Dark Chocolate Chunk.</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-4 pt-3 border-t border-cookie-100">
+                                <span class="text-xs text-cookie-600 font-medium">1 Set (3 Pcs)</span>
+                                <span class="font-serif font-bold text-xl text-cookie-900">RM 14.00</span>
+                            </div>
+                            <button onclick="redirectToOrder('Double Choc Fudge')" class="w-full bg-cookie-800 hover:bg-cookie-900 text-white py-2.5 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Order Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-cookie-200 shadow-md hover:shadow-xl transition duration-300 flex flex-col group">
+                    <div class="relative overflow-hidden h-52">
+                        <img src="https://images.unsplash.com/photo-1618923850107-d1a234d7a73a?q=80&w=800&auto=format&fit=crop" alt="Red Velvet Cream Cheese" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow">Trending</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-xl text-cookie-900 mb-2">Red Velvet Cheese</h3>
+                            <p class="text-cookie-800 text-xs mb-4 leading-relaxed">Kombinasi klasik Red Velvet bertatahkan filling Cream Cheese yang lemak manis.</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-4 pt-3 border-t border-cookie-100">
+                                <span class="text-xs text-cookie-600 font-medium">1 Set (3 Pcs)</span>
+                                <span class="font-serif font-bold text-xl text-cookie-900">RM 15.00</span>
+                            </div>
+                            <button onclick="redirectToOrder('Red Velvet Cheese')" class="w-full bg-cookie-800 hover:bg-cookie-900 text-white py-2.5 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Order Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-cookie-200 shadow-md hover:shadow-xl transition duration-300 flex flex-col group">
+                    <div class="relative overflow-hidden h-52">
+                        <img src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?q=80&w=800&auto=format&fit=crop" alt="Matcha White Choc" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 right-3 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow">New</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-xl text-cookie-900 mb-2">Matcha White Choc</h3>
+                            <p class="text-cookie-800 text-xs mb-4 leading-relaxed">Uji Matcha khas dari Jepun yang berkrim digabungkan dengan manis White Chocolate.</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-4 pt-3 border-t border-cookie-100">
+                                <span class="text-xs text-cookie-600 font-medium">1 Set (3 Pcs)</span>
+                                <span class="font-serif font-bold text-xl text-cookie-900">RM 15.00</span>
+                            </div>
+                            <button onclick="redirectToOrder('Matcha White Choc')" class="w-full bg-cookie-800 hover:bg-cookie-900 text-white py-2.5 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Order Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Order Section -->
+    <section id="how-to-order" class="py-20 bg-cookie-100 border-t border-b border-cookie-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-cookie-600 font-semibold text-sm uppercase tracking-widest block mb-2">Mudah & Cepat</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-cookie-900">3 Langkah Mudah Tempahan 📝</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                <!-- Step 1 -->
+                <div class="bg-cookie-50 p-8 rounded-2xl border border-cookie-200 text-center relative shadow-sm">
+                    <div class="w-16 h-16 bg-cookie-800 text-cookie-100 font-bold text-2xl rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
+                        1
+                    </div>
+                    <h3 class="font-bold text-xl text-cookie-900 mb-3">Pilih Flavour Kegemaran</h3>
+                    <p class="text-cookie-800 text-sm leading-relaxed">Tengok senarai menu dekat atas dan tentukan berapa set cookies yang korang nak craving hari ni.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-cookie-50 p-8 rounded-2xl border border-cookie-200 text-center relative shadow-sm">
+                    <div class="w-16 h-16 bg-cookie-800 text-cookie-100 font-bold text-2xl rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
+                        2
+                    </div>
+                    <h3 class="font-bold text-xl text-cookie-900 mb-3">Isi Google Form</h3>
+                    <p class="text-cookie-800 text-sm leading-relaxed">Tekan butang Order Now untuk ke borang Google Form. Masukkan butiran penghantaran & pilihan cookies.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-cookie-50 p-8 rounded-2xl border border-cookie-200 text-center relative shadow-sm">
+                    <div class="w-16 h-16 bg-cookie-800 text-cookie-100 font-bold text-2xl rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
+                        3
+                    </div>
+                    <h3 class="font-bold text-xl text-cookie-900 mb-3">Pengesahan WhatsApp</h3>
+                    <p class="text-cookie-800 text-sm leading-relaxed">Lepas hantar form, korang boleh WhatsApp kami untuk pengesahan bayaran & pick-up / delivery!</p>
+                </div>
+            </div>
+
+            <!-- Main Call to Action Box -->
+            <div class="mt-16 bg-gradient-to-r from-cookie-800 to-cookie-900 text-cookie-100 rounded-3xl p-8 sm:p-12 text-center shadow-xl">
+                <h3 class="font-serif text-2xl sm:text-3xl font-bold mb-4">Dah Sedia Nak Order Cookies Panas?</h3>
+                <p class="text-cookie-200 max-w-xl mx-auto mb-8 text-sm sm:text-base">Tekan butang di bawah untuk terus ke borang tempahan rasmi kami. Cepat sebelum slot bakar hari ni penuh!</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="redirectToOrder()" class="bg-caramel hover:bg-amber-600 text-white font-bold px-8 py-4 rounded-full shadow-lg transition transform active:scale-95 flex items-center gap-2">
+                        <i class="fa-solid fa-file-pen"></i>
+                        <span>Buka Borang Google Form</span>
+                    </button>
+                    <button onclick="redirectToWhatsApp()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-full shadow-lg transition transform active:scale-95 flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Chat WhatsApp Kami</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-cookie-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-cookie-500 font-semibold text-sm uppercase tracking-widest block mb-2">Customer Feedback</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-cookie-900">Apa Kata Mereka? 💬</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-cookie-100/50 p-6 rounded-2xl border border-cookie-200">
+                    <div class="flex text-amber-500 mb-3 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-cookie-800 text-sm italic mb-4">"Sedap giler wehh Red Velvet Cheese tu! Moist teruk kat dalam, tak manis sangat just nice. Nanti nak repeat order lagi!"</p>
+                    <div class="font-bold text-cookie-900 text-sm">- Sarah M., Student FKM</div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-cookie-100/50 p-6 rounded-2xl border border-cookie-200">
+                    <div class="flex text-amber-500 mb-3 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-cookie-800 text-sm italic mb-4">"Penghantaran pantas, cookies sampai suam-suam lagi. Melted chocolate dalam Classic Choc Chip tu mmg padu."</p>
+                    <div class="font-bold text-cookie-900 text-sm">- Amirul, Kolej Kediaman</div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-cookie-100/50 p-6 rounded-2xl border border-cookie-200">
+                    <div class="flex text-amber-500 mb-3 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-cookie-800 text-sm italic mb-4">"Harga sangat berbaloi untuk kualiti soft cookies macam ni. Matcha white choc best combination!"</p>
+                    <div class="font-bold text-cookie-900 text-sm">- Farhana, Student FBP</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & WhatsApp Section -->
+    <section id="contact" class="py-16 bg-cookie-900 text-cookie-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-cookie-300 font-semibold text-sm uppercase tracking-widest block mb-2">Ada Pertanyaan?</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold mb-4">Kami Sedia Membantu! 🤝</h2>
+                    <p class="text-cookie-200 mb-8 leading-relaxed">
+                        Ada soalan pasal self-pickup, bulk order untuk event, atau perasa custom? Tekan butang WhatsApp di bawah untuk chat secara terus dengan team kami.
+                    </p>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-cookie-800 rounded-full flex items-center justify-center text-caramel">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <span>Waktu Operasi: 10:00 AM - 10:00 PM (Setiap Hari)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-cookie-800 rounded-full flex items-center justify-center text-caramel">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <span>Pickup Location: Student Mall / Delivery Kampus</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-cookie-800 p-8 rounded-3xl border border-cookie-600/50 text-center">
+                    <div class="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-2">Direct WhatsApp Support</h3>
+                    <p class="text-cookie-200 text-sm mb-6">Klik butang hijau di bawah untuk terus hantar mesej ke WhatsApp kami.</p>
+                    <button onclick="redirectToWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl shadow-lg transition flex items-center justify-center gap-3 text-base">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        <span>Chat WhatsApp Sekarang</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-cookie-950 text-cookie-300 py-8 border-t border-cookie-900 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">🍪</span>
+                <span class="font-serif font-bold text-white text-lg">The Cookie Club</span>
+            </div>
+            <p class="text-xs text-cookie-400 text-center">
+                © <script>document.write(new Date().getFullYear())</script> Business Assignment Project. Built with ❤️ for Soft Cookie Lovers.
+            </p>
+            <div class="flex space-x-4 text-lg">
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="#" onclick="openConfigModal(); return false;" class="hover:text-white transition" title="Config Links"><i class="fa-solid fa-gear"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Configuration Modal (For User to set Google Form & WhatsApp Links) -->
+    <div id="config-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-cookie-50 rounded-2xl max-w-md w-full p-6 border border-cookie-300 shadow-2xl relative">
+            <button onclick="closeConfigModal()" class="absolute top-4 right-4 text-cookie-600 hover:text-cookie-900">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="font-serif text-xl font-bold text-cookie-900 mb-2 flex items-center gap-2">
+                <i class="fa-solid fa-link text-cookie-500"></i> Tetapkan Link Anda
+            </h3>
+            <p class="text-cookie-800 text-xs mb-4 leading-relaxed">
+                Masukkan link **Google Form** dan nombor **WhatsApp** korang kat sini supaya butang-butang dalam website berfungsi dengan link korang!
+            </p>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-cookie-800 mb-1">Google Form Link:</label>
+                    <input type="url" id="input-gform" placeholder="https://forms.gle/xxxxxx" class="w-full px-3 py-2 text-xs border border-cookie-300 rounded-lg focus:outline-none focus:border-cookie-600 bg-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-cookie-800 mb-1">Nombor WhatsApp (Contoh: 60123456789):</label>
+                    <input type="text" id="input-wa" placeholder="60123456789" class="w-full px-3 py-2 text-xs border border-cookie-300 rounded-lg focus:outline-none focus:border-cookie-600 bg-white">
+                </div>
+            </div>
+
+            <div class="mt-6 flex justify-end gap-2">
+                <button onclick="closeConfigModal()" class="px-4 py-2 text-xs font-semibold text-cookie-700 hover:bg-cookie-200 rounded-lg transition">Batal</button>
+                <button onclick="saveConfig()" class="px-4 py-2 text-xs font-semibold bg-cookie-800 text-white rounded-lg hover:bg-cookie-900 transition shadow">Simpan Links</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Default Links (Can be overridden via configuration modal)
+        let googleFormUrl = localStorage.getItem('cookie_gform') || 'https://forms.google.com';
+        let whatsappNumber = localStorage.getItem('cookie_wa') || '60123456789';
+
+        // Initialize inputs
+        document.getElementById('input-gform').value = googleFormUrl;
+        document.getElementById('input-wa').value = whatsappNumber;
+
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Config Modal Functions
+        function openConfigModal() {
+            document.getElementById('config-modal').classList.remove('hidden');
+        }
+
+        function closeConfigModal() {
+            document.getElementById('config-modal').classList.add('hidden');
+        }
+
+        function saveConfig() {
+            const gformInput = document.getElementById('input-gform').value.trim();
+            const waInput = document.getElementById('input-wa').value.trim();
+
+            if (gformInput) {
+                googleFormUrl = gformInput;
+                localStorage.setItem('cookie_gform', googleFormUrl);
+            }
+            if (waInput) {
+                whatsappNumber = waInput;
+                localStorage.setItem('cookie_wa', whatsappNumber);
+            }
+
+            closeConfigModal();
+            showToast('Links berjaya dikemaskini!');
+        }
+
+        // Action Handlers
+        function redirectToOrder(item = '') {
+            let finalUrl = googleFormUrl;
+            // Open link in new tab
+            window.open(finalUrl, '_blank');
+        }
+
+        function redirectToWhatsApp() {
+            const msg = encodeURIComponent("Hai! Saya nak bertanyakan tentang Soft Cookies / Nak buat tempahan.");
+            const waUrl = `https://wa.me/${whatsappNumber}?text=${msg}`;
+            window.open(waUrl, '_blank');
+        }
+
+        // Simple Toast Notification
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-5 right-5 z-50 bg-cookie-900 text-white px-5 py-3 rounded-xl shadow-xl text-sm flex items-center gap-2 animate-bounce';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> ${message}`;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
